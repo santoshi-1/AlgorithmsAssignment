@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -7,29 +11,59 @@ public class Task1 {
         Scanner sc = new Scanner(System.in);
 
         // n = Number of days & m = Number of houses
-        int n = sc.nextInt();
-        int m = sc.nextInt();
+//        int n = sc.nextInt();
+//        int m = sc.nextInt();
 
+        int n = 0, m = 0;
         //houses list is used to store the start and end day of each house.
         ArrayList<ArrayList<Integer>> houses = new ArrayList<>();
         ArrayList<Integer> house;
 
-        //Input of m houses start day and end day
-        for (int i = 0; i < m; i++) {
-            int start_day = sc.nextInt();
-            int end_day = sc.nextInt();
-            house = new ArrayList<>();
-            house.add(start_day);
-            house.add(end_day);
-            houses.add(house);
+        BufferedReader reader;
+        try {
 
+            reader = new BufferedReader(new FileReader("dataset.txt"));
+            String line = reader.readLine();
+            String[] arr = line.split(" ");
+            n = Integer.valueOf(arr[0]);
+            m = Integer.valueOf(arr[1]);
+            line = reader.readLine();
+            int count = 1;
+
+            while (line != null) {
+                arr = line.split(" ");
+                System.out.println(arr[0] + " " + arr[1]);
+                line = reader.readLine();
+                house = new ArrayList<>();
+                house.add(Integer.valueOf(arr[0]));
+                house.add(Integer.valueOf(arr[1]));
+                house.add(count);
+                houses.add(house);
+                count += 1;
+
+            }
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
+
+        //Input of m houses start day and end day
+//        for (int i = 0; i < m; i++) {
+//            int start_day = sc.nextInt();
+//            int end_day = sc.nextInt();
+//            house = new ArrayList<>();
+//            house.add(start_day);
+//            house.add(end_day);
+//            houses.add(house);
+//
+//        }
 
         Task1 task1 = new Task1();
         //List of painted houses
         ArrayList<Integer> result = task1.paintCompatibleHouse(houses, n, m);
 
-        System.out.println("List of painted houses - ");
+        System.out.println("List of painted houses - " + result.size());
         for (int i = 0; i < result.size(); i++) {
             System.out.print(result.get(i) + " ");
         }
