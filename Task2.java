@@ -86,8 +86,7 @@ public class Task2 {
 
     static class smallestIntervalComparator implements Comparator<House> {
         public int compare(House a, House b) {
-            int diff = ((b.getStart_day() - a.getStart_day()));
-            return diff == 0 ? b.getEnd_day() - a.getEnd_day() : diff;
+            return ((b.getStart_day() - a.getStart_day()));
         }
     }
 }
