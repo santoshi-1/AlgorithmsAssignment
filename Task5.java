@@ -33,6 +33,12 @@ public class Task5 {
 
         int house_ind = 0;
         int current_day = 1;
+
+        /**
+         * This loop runs for at max O(m) times and the operations inside it cost a
+         * maximum of 2mlogm (logm for inserting into priority queue and logm for removing
+         * from priority queue)
+         */
         while (house_ind < m) {
             int start_day = houses.get(house_ind).get(0);
             int end_day = houses.get(house_ind).get(1);
@@ -42,28 +48,68 @@ public class Task5 {
                 current_day = start_day;
             }
 
+            if (start_day > n) break;
+
+            if (start_day > current_day || house_ind == m) {
+                while (!priorityQueue.isEmpty() && start_day > current_day) {
+                    House h = priorityQueue.peek();
+
+//                    if (start_day == current_day) break;
+
+                    if (h.getEnd_day() >= current_day) {
+                        h = priorityQueue.peek();
+                        result.add(h.getHouse_number());
+                        priorityQueue.poll();
+                        current_day += 1;
+                    } else if (h.getEnd_day() < current_day) {
+                        priorityQueue.poll();
+                    } else {
+                        break;
+                    }
+
+                }
+                current_day = start_day;
+            }
+
+
             while (house_ind < m && start_day <= current_day) {
                 priorityQueue.add(new House(start_day, end_day, index));
                 house_ind += 1;
-            }
-
-            System.out.println("current day is " + current_day);
-
-            if (!priorityQueue.isEmpty()) {
-                House h = priorityQueue.peek();
-                while (!priorityQueue.isEmpty() && h.getEnd_day() < current_day) {
-                    priorityQueue.poll();
+                if (house_ind < m) {
+                    start_day = houses.get(house_ind).get(0);
+                    end_day = houses.get(house_ind).get(1);
+                    index = houses.get(house_ind).get(2);
                 }
 
-                System.out.println("size is " + priorityQueue.size());
-
-                if (!priorityQueue.isEmpty()) {
-                    h = priorityQueue.peek();
-                    result.add(h.getHouse_number());
-                    priorityQueue.poll();
-                    current_day += 1;
-                }
             }
+        }
+
+        /**
+         * This loop runs for atmost m + mlogm (remove atmost m items from priority queue)
+         */
+        while (!priorityQueue.isEmpty()) {
+            House h = priorityQueue.peek();
+
+            if (h.getStart_day() > current_day) {
+                current_day += 1;
+                continue;
+            } else if (current_day > n || h.getStart_day() > n) {
+                break;
+            }
+
+            if (h.getStart_day() > n) break;
+
+            if (h.getEnd_day() >= current_day) {
+                h = priorityQueue.peek();
+                result.add(h.getHouse_number());
+                priorityQueue.poll();
+                current_day += 1;
+            } else if (h.getEnd_day() < current_day) {
+                priorityQueue.poll();
+            } else {
+                break;
+            }
+
         }
 
 
