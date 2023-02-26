@@ -29,10 +29,10 @@ public class Task1 {
         //List of painted houses
         ArrayList<Integer> result = task1.paintCompatibleHouse(houses, n, m);
 
-        System.out.println("List of painted houses - ");
         for (int i = 0; i < result.size(); i++) {
             System.out.print(result.get(i) + " ");
         }
+        System.out.println();
     }
 
     /**

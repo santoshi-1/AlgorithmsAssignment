@@ -53,10 +53,11 @@ public class Task3 {
             }
         }
 
-        System.out.println("List of painted houses - ");
+        //List of painted houses
         for (int i = 0; i < result.size(); i++) {
             System.out.print(result.get(i) + " ");
         }
+        System.out.println();
     }
 
     static class House {
@@ -83,6 +84,9 @@ public class Task3 {
         }
     }
 
+    /**
+     * sort the priority queue based on the increasing order of the shortest interval (end_day - start_day)
+     */
     static class smallestIntervalComparator implements Comparator<House> {
         public int compare(House a, House b) {
             int diff = ((a.getEnd_day() - a.getStart_day()) - (b.getEnd_day() - b.getStart_day()));

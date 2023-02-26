@@ -26,6 +26,8 @@ public class Task2 {
             house.add(i + 1);
             houses.add(house);
         }
+
+        //List of painted houses
         ArrayList<Integer> result = new ArrayList<>();
 
         int house_ind = 0;
@@ -54,10 +56,10 @@ public class Task2 {
             }
         }
 
-        System.out.println("List of painted houses - ");
         for (int i = 0; i < result.size(); i++) {
             System.out.print(result.get(i) + " ");
         }
+        System.out.println();
     }
 
     static class House {
@@ -84,6 +86,10 @@ public class Task2 {
         }
     }
 
+    /**
+     * Sort the priority queue in descending order of the start day (which is the available
+     * the latest)
+     */
     static class smallestIntervalComparator implements Comparator<House> {
         public int compare(House a, House b) {
             return ((b.getStart_day() - a.getStart_day()));
