@@ -47,7 +47,7 @@ public class Task3 {
                 if (i >= h.getStart_day() && i <= h.getEnd_day()) {
                     result.add(h.getHouse_number());
                     break;
-                } else if (i > h.getStart_day()) {
+                } else if (i > h.getEnd_day()) {
                     priorityQueue.poll();
                 }
             }
