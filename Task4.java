@@ -27,6 +27,7 @@ public class Task4 {
             houses.add(house);
         }
         ArrayList<Integer> result = new ArrayList<>();
+        long startTime = System.nanoTime();
 
         int house_ind = 0;
         for (int i = 1; i <= n; i++) {
@@ -53,12 +54,15 @@ public class Task4 {
                 }
             }
         }
+        long endTime = System.nanoTime();
+        long duration = (endTime - startTime);
 
 
         for (int i = 0; i < result.size(); i++) {
             System.out.print(result.get(i) + " ");
         }
         System.out.println();
+        System.out.print("The result size is " + result.size());
     }
 
     static class House {

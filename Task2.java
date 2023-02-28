@@ -59,6 +59,8 @@ public class Task2 {
         for (int i = 0; i < result.size(); i++) {
             System.out.print(result.get(i) + " ");
         }
+        System.out.print("The result size is " + result.size());
+
         System.out.println();
     }
 

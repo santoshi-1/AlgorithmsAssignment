@@ -42,6 +42,7 @@ public class Task5 {
          *
          * so total complexity = m + mlogm = theta(mlogm)
          */
+        long startTime = System.nanoTime();
         while (house_ind < m) {
             int start_day = houses.get(house_ind).get(0);
             int end_day = houses.get(house_ind).get(1);
@@ -112,12 +113,14 @@ public class Task5 {
             }
 
         }
-
+        long endTime = System.nanoTime();
+        long duration = (endTime - startTime);
 
         for (int i = 0; i < result.size(); i++) {
             System.out.print(result.get(i) + " ");
         }
         System.out.println("");
+        System.out.print("The result size is " + result.size());
     }
 
     static class House {
